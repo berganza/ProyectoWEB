@@ -1,0 +1,90 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<head th:fragment="header-css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link type='text/javascript' href='../static/js/buscar.js'></link>
+</head>
+<body>
+	<div th:fragment="header">
+		<!--Navbar-->
+		<nav class="navbar navbar-expand-lg navbar-blue primary-color">
+			<!-- Navbar brand -->
+			<a class="navbar-brand" th:href="@{luis}">Berganza</a>
+			<!-- Collapse button -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#basicExampleNav" aria-controls="basicExampleNav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<!-- Collapsible content -->
+			<div class="collapse navbar-collapse" id="basicExampleNav">
+				<!-- Links -->
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link"
+						th:href="@{'/'}">Home <span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{luis}">AboutMe</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{index}">crud</a></li>
+					<!-- Dropdown -->
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Opciones </a>
+						<div class="dropdown-menu dropdown-primary"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" th:href="@{index}">Listado</a>
+							<a class="dropdown-item" th:href="@{conexionBBDD}">Conexión MySQL</a>
+							<a class="dropdown-item" th:href="@{H2conexionBBDD}">Conexión H2 BBDD</a>
+							<a class="dropdown-item" th:href="@{codigo2}">Code2</a>
+							<a class="dropdown-item" th:href="@{codigo3}">Code3</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" th:href="@{luis}">Sobre el autor</a>
+							<a class="dropdown-item" href="#">Log Out</a>
+						</div></li>
+				</ul>
+				<form class="form-inline">
+					<div class="md-form my-0">
+						<input id="buscar" class="form-control mr-sm-2" type="text"
+							placeholder="Search" aria-label="Search">
+					</div>
+				</form>
+			</div>
+			<!-- Collapsible content -->
+			<div class="btn-group">
+				<button type="button" class="btn btn-danger dropdown-toggle"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Login</button>
+				<div class="dropdown-menu dropdown-menu-right">
+					<form class="px-4 py-3">
+						<div class="form-group">
+							<label for="exampleDropdownFormEmail1">Email address</label> <input
+								type="email" class="form-control" id="exampleDropdownFormEmail1"
+								placeholder="email@example.com">
+						</div>
+						<div class="form-group">
+							<label for="exampleDropdownFormPassword1">Password</label> <input
+								type="password" class="form-control"
+								id="exampleDropdownFormPassword1" placeholder="Password">
+						</div>
+						<div class="form-group">
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input"
+									id="dropdownCheck"> <label class="form-check-label"
+									for="dropdownCheck"> Remember me </label>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">Sign in</button>
+					</form>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">New around here? Sign up</a> <a
+						class="dropdown-item" href="#">Forgot password?</a>
+				</div>
+			</div>
+		</nav>
+		<!--/.Navbar-->
+	</div>
+</body>
+</html>

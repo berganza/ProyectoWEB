@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>MySQL conexion</title>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<style>
+       .prettyprint ol.linenums > li { list-style-type: decimal; }
+       
+       pre.prettyprint {background-color: #eee;}
+	li.L0, li.L1, li.L2, li.L3, li.L4, li.L5, li.L6, li.L7, li.L8, li.L9 {
+ 			list-style-type: decimal;
+	} 
+</style>
+</head>
+<body>
+	<header th:insert="fragments/header.html :: header"></header>
+	<div class="container">
+		<h4>Conexión básica:</h4>
+		
+		<p>Hay que tener en cuenta que la Base de datos debe existir en MySQL, es decir, primero hay que crear la base de datos para poder hacer la conexión. Con el nombre sería suficiente ya que las tablas serán generadas por la aplicación al momento de conectar.</p>
+		<hr>
+		<pre class="prettyprint linenums">
+spring.datasource.url = jdbc:mysql://localhost:3306/NOMBRE_DE_LA_BBDD
+spring.datasource.username = SU_USERNAME
+spring.datasource.password = SU_CONTRASEÑA
+spring.datasource.driver-class-name = com.mysql.cj.jdbc.Driver
+
+spring.jpa.show-sql = true
+spring.jpa.open-in-view = false
+spring.jpa.hibernate.ddl-auto = update
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+		</pre>
+		<hr>
+		<div>
+			<a class="btn btn-info" th:href="@{'/'}">Volver</a>
+		</div>
+		<hr>
+	</div>
+<div th:replace="fragments/footer :: footer"></div><br>
+</body>
+</html>

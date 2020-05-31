@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:fragment="footer">
+
+    <div class="container">
+
+        <footer>
+        <!-- this is footer -->
+        &copy; 2019 berg
+            <span sec:authorize="isAuthenticated()">
+                | Logeado con usuario: <span sec:authentication="name"></span> |
+                Rol: <span sec:authentication="principal.authorities"></span> |
+                 <a th:href="@{/}">Log Out</a>
+            </span>
+
+        <script type="text/javascript"
+                src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        </footer>
+    </div>
+</div>
+</body>
+</html>

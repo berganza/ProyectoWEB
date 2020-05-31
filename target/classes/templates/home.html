@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+</head>
+<body>
+	<header th:insert="fragments/header.html :: header"></header>
+	<div class="container">
+		<hr>
+		<div class="alert alert-info  text-center" role="alert">
+		Página Principal - <b>CUADRO DE CONTROL</b>
+		</div>
+		<hr>
+		<div class=" row  justify-content-around" role="alert">
+			<div class="col-4 alert alert-success">
+				<hr>
+				<p>Bienvenido a la plantilla del <b>proyecto</b>.</p>
+				<p>Desde aquí podrá empezar a navegar por las diferentes páginas de la web.</p>
+				<p>Toda la plantilla está pensada para poder disponer de diversos ejemplos que sirvan de consulta y como resolución de dudas.</p>
+				<p>Incluso el mismo problema puede estar resuelto con varias opciones.</p>
+				<hr>
+			</div>
+			<div class="col-4 alert alert-warning">
+				<hr>
+				<p>Plantilla del <b>listado</b>.</p>
+				<p>Con los botones "listado" conectará con la BBDD de MySQL y mostrará todas las personas registradas en la base.</p>
+				<p>Dichos botones y enlaces están disponibles en diferentes partes del cuerpo:</p>
+				<ul><li>barra de navegación "crud"</li><li>dropdown "Opciones/listado"</li><li>botones específicos <a class="btn btn-info" th:href="@{index}">Listado</a></li></ul>
+				<hr>
+			</div>
+		</div>
+		<div class=" row  justify-content-around" role="alert">
+			<div class="col-4 alert alert-primary">
+				<hr>
+				<p><b>Base de Datos</b> del proyecto.</p>
+				<p>Dentro del archivo "<em>application.properties</em>" se encuentra la conexión con la base de datos.</p>
+				<div align="center">
+ 					<a class="btn btn-info" th:href="@{conexionBBDD}">Conexion</a>
+ 				</div>
+ 				<p>He puesto el tipo de conexión básico para empezar.</p>
+				<hr>				
+				<p>También cabría la posibilidad de usar H2 para disponer de una base de datos durante la fase de desarrollo, sin necesidad de conexión externa.</p>
+				<p>Al utilizar H2 debemos de crear una configuración diferente en el archivo "application.properties". Más detalles aquí:</p>
+				<div align="center">
+					<a class="btn btn-info" th:href="@{H2conexionBBDD}">H2 BBDD</a>
+				</div>
+				<hr>
+			</div>
+			<div class="col-4 alert alert-dark">
+				<hr>
+				<p><b>Código</b> del proyecto (1).</p>
+				<hr>
+				<p>La tecnología usada para el projecto ha sido:
+				<ul>
+					<li>Spring Boot con <b>STS4</b></li>
+					<li>Spring Web Starter</li>
+					<li>Spring Data JPA</li>
+					<li>MySQL Driver</li>
+					<li>Spring Boot DevTools</li>
+					<li>Lombok</li>
+					<li>Thymeleaf</li>
+					<li>Spring Security</li>
+				</ul>
+				<hr>
+				<p><b>HTML</b>, <b>CSS</b> y <b>JS</b> con Bootstrap y thymeleaf.</p>
+				<a class="btn btn-info" th:href="@{https://getbootstrap.com/docs/4.3/getting-started/introduction/}">Boostrap</a>
+				<a class="btn btn-info" th:href="@{https://www.thymeleaf.org/}">Thymeleaf</a>
+				<hr>
+				<p>Se trabaja con <b>fragments</b> para el header y el footer.</p>
+				<hr>
+			</div>
+		</div>
+		<div class=" row  justify-content-around" role="alert">
+			<div class="col-4 alert alert-dark">
+				<hr>
+				<p><b>Código</b> del proyecto (2).</p>
+				<p>Se muestra la estructura y las clases genéricas de un proyecto CRUD.</p>
+				<p>En el árbol estructural se hace especial mención a un típico desglose de clases básicas para afrontar éste tipo de proyectos. Se persigue dicha simplicidad para lograr un mayor entendimiento de los diferentes procesos que intervienen en estos proyectos.</p>
+				<div align="center">
+					<a class="btn btn-info" th:href="@{codigo2}">Code 2</a>
+				</div>
+				<hr>
+			</div>
+			<div class="col-4 alert alert-dark">
+				<hr>
+				<p><b>Código</b> del proyecto (3).</p>
+				<p>Dedicaremos especial atención a la parte de los <b>controladores</b>.</p>
+				<p>En ésta ocasión se opta por dos controladores para separar la parte "web", donde se refleja la comunicación interna entre páginas, de la parte "lógica" de la aplicación, donde se desarrollan todos los métodos necesarios que permiten interactuar con la base de datos.</p>
+				<div align="center">
+					<a class="btn btn-info" th:href="@{codigo3}">Code 3</a>
+				</div>
+				<hr>
+			</div>
+		</div>
+		<hr>
+		<div>
+			<a class="btn btn-info" th:href="@{index}">Listado</a>
+		</div>
+	</div>
+	<hr>
+<div th:replace="fragments/footer :: footer"></div><br>
+</body>
+</html>

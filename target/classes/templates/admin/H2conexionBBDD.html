@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>H2 conexion</title>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" type="text/css" href="static/css/index.css"	th:href="@{/css/index.css}">
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<style>
+       .prettyprint ol.linenums > li { list-style-type: decimal; }
+       pre.prettyprint {background-color: #eee;}
+	li.L0, li.L1, li.L2, li.L3, li.L4, li.L5, li.L6, li.L7, li.L8, li.L9 {
+ 			list-style-type: decimal;
+	} 
+</style>
+</head>
+<body>
+	<header th:insert="fragments/header.html :: header"></header>
+	<div class="container">
+		<h4>Conexión H2:</h4>
+		<hr>
+		<p>Hay que crear un fichero "<b>import.sql</b>" para que al iniciar la plicación cargue dicho archivo con las ordenes necesarias para crear los registros que contendrá inicialmente nuestra base de datos.</p>
+		<p>Simplemente podemos copiar el siguiente ejemplo en el archibo import.sql para que genere unas entradas inicialmente.</p>
+		<pre class="prettyprint linenums">
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Aitor','Tilla','Percebe, 13','555 30 20');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Elena','Nito','Percebe, 33','555 78 98');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Cindy','Entes','Percebe, 32','555 78 10');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Encarna','Vales','Percebe, 3','555 12 32');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Hector','Tuga','Percebe, 2','555 45 65');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Jorge','Nitales','Percebe, 1','555 41 47');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Juan','Tanamera','Percebe, 56','555 45 74',);
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Mario','Neta','Percebe, 43','555 89 12');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Olga','Seosa','Percebe, 5','555 46 54');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Paco','Cido','Percebe, 65','555 79 81');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Susana','Torio','Percebe,11','555 41 65');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Victor','Tazo','Percebe, 43','555 45 19');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Omar','Ciano','Percebe, 91','555 15 76');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Nicolas','Queroso','Percebe, 31','555 37 39');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Matilde','Pilate','Percebe, 39','555 19 73');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Lucas','Poso','Percebe, 83','555 55 44');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Jacobo','Ludo','Percebe, 44','555 12 44');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Elsa','Nitario','Percebe, 10','555 66 11');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Edgar','Gajo','Percebe, 7','555 77 15');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Elba','Surero','Percebe, 22','555 94 67');
+INSERT INTO persona (nombre, apellido, direccion, telefono) VALUES ('Aquiles','Vailo','Percebe, 30','555 59 51');
+		</pre>
+		<hr>
+		<p>En el archivo "<b>application.properties</b>" escribimos el siguiente ejemplo de conexión inicial:</p>
+		<pre class="prettyprint linenums">
+# H2
+spring.h2.console.enabled = true
+spring.h2.console.path = /console
+# Datasource
+spring.datasource.url = jdbc:h2:mem:emdao;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+spring.datasource.username = sa
+spring.datasource.password =
+spring.datasource.driver-class-name = org.h2.Driver
+		</pre>
+		<hr>
+		<p>** Con la instrucción "<b>spring.h2.console.path = /console</b>" le estamos indicando que tenemos acceso a la base de datos en la dirección "<b>http://localhost:8080/console</b>" para poder gestionar directamente nuestras consultas en SQL.</p>
+		<hr>
+		<div>
+			<a class="btn btn-info" th:href="@{'/'}">Volver</a>
+		</div>
+	</div>
+	<hr>
+<div th:replace="fragments/footer :: footer"></div><br>
+</body>
+</html>

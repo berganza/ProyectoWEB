@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Personas</title>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+</head>
+<body>
+<header th:insert="fragments/header.html :: header"></header>
+	<div class="container">
+		<br>
+		<div>
+			<a th:href="@{/save}" class="btn btn-primary">Agregar</a>
+		</div>
+		<div th:switch="${list}">
+			<h2 th:case="null">No hay personas</h2>
+			<div th:case="*">
+				<h2>Personas</h2>
+				<table id="tabla" class="table">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Dirección</th>
+							<th>Teléfono</th>
+							<th>Acciones</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="persona : ${list}">
+							<td th:text="${persona.nombre}"></td>
+							<td th:text="${persona.apellido}"></td>
+							<td th:text="${persona.direccion}"></td>
+							<td th:text="${persona.telefono}"></td>
+							<td><a class="btn btn-info"
+								th:href="@{/detail/{id}(id=${persona.id})}">Detalle</a></td>
+							<td><a class="btn btn-info"
+								th:href="@{/save/{id}(id=${persona.id})}">Editar</a></td>
+							<td><a class="btn btn-danger"
+								th:href="@{/delete/{id}(id=${persona.id})}">Eliminar</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<a class="btn btn-success" th:href="@{'/'}">Página Principal</a>
+		<br><br>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+	<script type="text/javascript" src="/js/buscar.js"></script>
+</body>
+</html>

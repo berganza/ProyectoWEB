@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Detalle</title>
+<!-- this is header-css -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+</head>
+<body>
+<header th:insert="fragments/header.html :: header"></header>
+	<div class="container">
+	 	<h4>Lista: detalle</h4>
+		<ul>
+			<li th:text="${persona.id}"/>
+			<li th:text="${persona.nombre}" />
+			<li th:text="${persona.apellido}" />
+			<li th:text="${persona.direccion}"/>
+			<li th:text="${persona.telefono}" />
+		</ul>
+		<div>
+			<a class="btn btn-info" th:href="@{'/index'}">Volver</a>
+		</div>
+	</div>
+</body>
+</html>

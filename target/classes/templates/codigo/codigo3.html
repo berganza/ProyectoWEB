@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Controladores</title>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.js"></script>
+<style>
+        .prettyprint ol.linenums > li { list-style-type: decimal; }
+        
+        pre.prettyprint {background-color: #eee;}
+		li.L0, li.L1, li.L2, li.L3, li.L4,
+		li.L5, li.L6, li.L7, li.L8, li.L9 {
+  			list-style-type: decimal;
+		} 
+</style>
+</head>
+<body>
+	<header th:insert="fragments/header.html :: header"></header>
+	<div class="container">
+		<h4>Code (3):</h4>
+		<p>Una imagen de ejemplo de la estructura del proyecto podría ser representada así:</p>
+		<img th:src="@{'/img/code1A.png'}" alt="kk" />
+		<p>Donde se concreta por separado el <b>Modelo</b>, los <b>Servicios</b> con su implementación, el <b>Repositorio</b> y los diferentes <b>Controladores</b> que se necesiten en el proyecto.</p>
+
+		<hr>
+		<p>La clase <b>WebController</b> está destinada a crear la comunicación interna entre las diversas páginas que componen el proyecto. Con la anotación <b>@Controller</b> se le indica su finalidad y con la <b>@RequestMapping</b> para mapear las llamadas a dichas páginas. Como siempre, se persigue una simplificación destinada a la comprensión de la lógica.</p>
+		<p>Todos los links del proyecto (enlaces, botones,...) pasarán por éste controlador para facilitar el trabajo de llamadas.</p>
+		<p>Más adelante se hace referencia a la comunicación externa, es decir, en caso de utilizar otro tipo de frameworks, por ejemplo Angular, donde no existirían páginas internas, se necesitaría implementar otro tipo de controlador.</p>
+		<pre class="prettyprint linenums">
+package com.berg.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class WebController {
+	
+	@RequestMapping("/")
+	public String home(Model model){
+		return "home";
+	}
+	
+	@RequestMapping("/conexionBBDD")
+	public String conexionMySQL(Model model){
+		return "admin/conexionBBDD";
+	}
+	@RequestMapping("/H2conexionBBDD")
+	public String conexionH2(Model model){
+		return "admin/H2conexionBBDD";
+	}
+	
+	@RequestMapping("/luis")
+	public String about(Model model){
+		return "admin/luis";
+	}
+	
+	@RequestMapping("/codigo2")
+	public String code1(Model model){
+		return "codigo/codigo2";
+	}
+	
+	@RequestMapping("/codigo3")
+	public String code2(Model model){
+		return "codigo/codigo3";
+	}
+}
+		</pre>
+		<hr>
+		<p>En el controlador <b>MainController</b> creamos los métodos para trabajar con el CRUD. Nos centramos básicamente en los métodos tipo CRUD para trabajar con el listado de personas, más adelante, si dispongo de tiempo, intentaré incorporar otros filtros implementando bases relacionales.</p>
+		<pre class="prettyprint linenums lang-java">
+package com.berg.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import com.berg.modelo.Persona;
+import com.berg.repositorio.PersonaRepositorio;
+
+@Controller
+public class MainController {
+	
+	@Autowired
+	private PersonaRepositorio repo;
+	
+	// Para páginas internas, dentro de la aplicacion
+	@RequestMapping("/index")
+	public String getAll(Model model){
+		model.addAttribute("list", repo.findAll());
+		return "listado/index";
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable Long id, Model model) {
+		repo.deleteById(id);
+		return "redirect:/index";
+	}
+	
+	@RequestMapping("/save")
+	public String create(Persona persona) {
+		repo.save(persona);
+		return "listado/save";
+	}
+	
+	@PostMapping("/save")
+	public String save(Persona persona, Model model) {
+		repo.save(persona);
+		return "redirect:/index";
+	}
+	
+	@GetMapping("/save/{id}")
+    public String edit(@PathVariable("id") Long id, Model model) {
+        if (id != null && id != 0) {
+            model.addAttribute("persona", repo.findById(id));
+        } else {
+            model.addAttribute("persona", new Persona());
+        }
+        return "listado/save";
+    }
+	
+	@RequestMapping("/detail/{id}")
+	public String get(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("persona", repo.findById(id).get());
+		return "listado/detail";
+	}
+}
+		</pre>
+		<hr>
+		<div>
+			<a class="btn btn-info" th:href="@{'/'}">Volver</a>
+		</div>
+		<hr>
+	</div>
+<div th:replace="fragments/footer :: footer"></div><br>
+</body>
+</html>

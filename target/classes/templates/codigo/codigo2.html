@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Personas</title>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.js"></script>
+<style>
+        .prettyprint ol.linenums > li { list-style-type: decimal; }
+        
+        pre.prettyprint {background-color: #eee;}
+		li.L0, li.L1, li.L2, li.L3, li.L4, li.L5, li.L6, li.L7, li.L8, li.L9 {
+  			list-style-type: decimal;
+		} 
+</style>
+</head>
+<body>
+	<header th:insert="fragments/header.html :: header"></header>
+	<div class="container">
+		<h4>Code (2):</h4>
+		<p>Una imagen de ejemplo de la estructura del proyecto podría ser representada así:</p>
+		<img th:src="@{'/img/code1A.png'}" alt="kk" />
+		<p>Donde concretamos por separado el <b>Modelo</b>, los <b>Servicios</b> con su implementación, el <b>Repositorio</b> y los diferentes <b>Controladores</b> que se necesiten en el proyecto.</p>
+
+		<hr>
+		<p>La clase <b>Modelo</b> es sencilla, la única salvedad a destacar es la inclusión de <b>Lombok</b> para generar de manera automática los getters, setters, constructores, etc. Creamos el <b>@Entity</b> Persona que dará nombre a la tabla de la base de datos.</p>
+		<pre class="prettyprint linenums">
+package com.berg.modelo;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.Data;
+
+@Data
+@Entity
+public class Persona {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String nombre;
+	private String apellido;
+	private String direccion;
+	private String telefono;
+}
+		</pre>
+		<hr>
+		<p>En la clase <b>PersonaService</b> declaramos los métodos que utilizaremos, en este caso nos centraremos básicamente en los métodos tipo CRUD para trabajar con el listado de personas.</p>
+		<pre class="prettyprint linenums lang-java">
+package com.berg.service;
+
+import java.util.List;
+import com.berg.modelo.Persona;
+
+public interface PersonaService {
+	Persona create(Persona persona);
+	Persona save (Persona persona);
+	void delete(Long id);
+	Persona get(Long id);
+	Persona edit(Long id);
+	List&lt;Persona&gt; getAll();
+}
+		</pre>
+		<hr>
+		<p>Por su parte, en la clase <b>PersonaServiceImpl</b> desarrollamos los métodos que hemos declarado en el service.</p>
+		<pre class="prettyprint linenums lang-java">
+package com.berg.service;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.berg.modelo.Persona;
+import com.berg.repositorio.PersonaRepositorio;
+
+@Service
+public class PersonaServiceImpl implements PersonaService {
+	
+	@Autowired
+	private PersonaRepositorio repo;
+	
+	@Override
+	public Persona create(Persona persona) {
+		return repo.save(persona);
+	}
+
+	@Override
+	public Persona save(Persona persona) {
+		return repo.save(persona);
+	}
+
+	@Override
+	public void delete(Long id) {
+		repo.deleteById(id);
+	}
+
+	@Override
+	public Persona get(Long id) {
+		return repo.findById(id).get();
+	}
+
+	@Override
+	public List&lt;Persona&gt; getAll() {
+		return repo.findAll();
+	}
+
+	@Override
+	public Persona edit(Long id) {
+		return repo.getOne(id);
+	}
+}
+		</pre>
+		<hr>
+		<p>En la parte correspondiente al repositorio, en la clase <b>PersonaRepositorio</b>, instanciaremos de manera interna todos los métodos que extendemos de la persistencia correspondiente al JPA.</p>
+		<pre class="prettyprint linenums lang-java">
+package com.berg.repositorio;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import com.berg.modelo.Persona;
+
+@Repository
+public interface PersonaRepositorio extends JpaRepository&lt;Persona, Long&gt; {
+
+}
+		</pre>
+		<hr>
+		<div>
+			<a class="btn btn-info" th:href="@{'/'}">Volver</a>
+		</div>
+		<hr>
+	</div>
+<div th:replace="fragments/footer :: footer"></div><br>
+</body>
+</html>
